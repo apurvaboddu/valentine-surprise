@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For My Husband ❤️</title>
 
 <style>
@@ -28,9 +29,10 @@ to{transform:translateY(-100vh);}
 
 .card{
 background:white;
-width:430px;
-margin:70px auto;
-padding:35px;
+width:90%;
+max-width:430px;
+margin:60px auto;
+padding:25px;
 border-radius:20px;
 box-shadow:0 10px 30px rgba(0,0,0,.2);
 position:relative;
@@ -49,12 +51,18 @@ cursor:pointer;
 transition:.3s;
 }
 
+button:hover{
+transform:scale(1.05);
+}
+
 .hidden{display:none;}
 
 .gif{
-width:260px;
+width:80%;
+max-width:260px;
 border-radius:15px;
-margin:15px;
+margin:15px auto;
+display:block;
 }
 
 .heart{
@@ -137,7 +145,6 @@ Who says "5 mins" but takes 30 mins to get ready? 😂
 </p>
 <button onclick="show('ready')">Leela🤣</button>
 <button onclick="show('ready')">Krishna 😜</button>
-
 </div>
 
 <div id="ready" class="card hidden">
@@ -169,18 +176,15 @@ document.getElementById("warn").innerText="😜 Select wisely mister!";
 function escapeNo(){
 let btn=document.getElementById("noBtn");
 btn.style.position="absolute";
-btn.style.left=Math.random()*80+"%";
-btn.style.top=Math.random()*70+"%";
+btn.style.left=Math.random()*70+"%";
+btn.style.top=Math.random()*60+"%";
 }
-
-/* ❤️ UPDATED FINAL SCREEN */
-/* ❤️ NEW BEAUTIFUL FINAL SCREEN */
-
 
 function celebrate() {
   document.getElementById("final").innerHTML = `
     <div style="
-      height:520px;
+      width:100%;
+      height:70vh;
       display:flex;
       justify-content:center;
       align-items:center;
@@ -189,22 +193,18 @@ function celebrate() {
       overflow:hidden;
       box-shadow:0 20px 40px rgba(0,0,0,0.3);
     ">
-
       <img src="dudu.png"
       style="
-        max-height:480px;
+        width:90%;
+        max-width:400px;
+        height:auto;
         border-radius:20px;
         box-shadow:0 10px 25px rgba(0,0,0,0.25);
       ">
-
     </div>
   `;
 }
-
-
-
 </script>
 
 </body>
 </html>
-
