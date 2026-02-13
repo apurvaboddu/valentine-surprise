@@ -80,12 +80,12 @@ animation:burst 3s linear forwards;
 
 <body>
 
-<audio autoplay loop>
+<audio id="bgMusic" loop>
 <source src="https://cdn.pixabay.com/audio/2023/03/27/audio_5d7c4a91df.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-/* DOODLES */
+/* FLOATING DOODLES */
 for(let i=0;i<35;i++){
 let d=document.createElement("div");
 d.className="doodle";
@@ -100,7 +100,7 @@ document.body.appendChild(d);
 <div id="intro" class="card">
 <h2>Hey Husband ❤️</h2>
 <p>I have a surprise for you…</p>
-<button onclick="show('letter')">Open 💌</button>
+<button onclick="playMusic(); show('letter')">Open 💌</button>
 </div>
 
 <!-- LETTER -->
@@ -160,10 +160,15 @@ Who says "5 mins" but takes 30 mins to get ready? 😂
 <img class="gif" src="https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif">
 <br>
 <button onclick="celebrate()">YES ❤️</button>
-<button id="noBtn" onmouseover="escapeNo()">NO 😏</button>
+<button id="noBtn" onclick="escapeNo()">NO 😏</button>
 </div>
 
 <script>
+function playMusic(){
+  const music = document.getElementById("bgMusic");
+  music.play();
+}
+
 function show(id){
 document.querySelectorAll(".card").forEach(c=>c.classList.add("hidden"));
 document.getElementById(id).classList.remove("hidden");
@@ -173,11 +178,31 @@ function warn(){
 document.getElementById("warn").innerText="😜 Select wisely mister!";
 }
 
+/* ESCAPING + CHANGING NO BUTTON */
+let noMessages = [
+  "Are you sure? 😏",
+  "Think twice 😌",
+  "You will regret later 😜",
+  "Last chance 😬",
+  "This could be mistake 😶",
+  "Finally change of heart? 🥺"
+];
+
+let noIndex = 0;
+
 function escapeNo(){
-let btn=document.getElementById("noBtn");
-btn.style.position="absolute";
-btn.style.left=Math.random()*70+"%";
-btn.style.top=Math.random()*60+"%";
+  let btn = document.getElementById("noBtn");
+
+  if(noIndex < noMessages.length){
+    btn.innerText = noMessages[noIndex];
+    noIndex++;
+  } else {
+    btn.innerText = "Only YES works ❤️";
+  }
+
+  btn.style.position = "absolute";
+  btn.style.left = Math.random()*70 + "%";
+  btn.style.top = Math.random()*60 + "%";
 }
 
 function celebrate() {
