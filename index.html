@@ -7,87 +7,59 @@
 
 <style>
 
-/* ===== BODY ===== */
-
+/* ===== BACKGROUND ===== */
 body{
 margin:0;
 height:100vh;
-font-family:'Poppins', sans-serif;
+font-family:'Segoe UI', sans-serif;
 display:flex;
 justify-content:center;
 align-items:center;
 overflow:hidden;
-background: linear-gradient(-45deg,#ff9a9e,#fad0c4,#fbc2eb,#a18cd1);
-background-size:400% 400%;
-animation:bgMove 12s ease infinite;
+background: linear-gradient(135deg,#ffe6eb,#fff5f7,#ffe0f0);
 }
 
-/* moving gradient */
-@keyframes bgMove{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
-}
-
-/* ===== GLOW BLOBS ===== */
-
-.blob{
+/* ===== FLOATING DOODLES ===== */
+.doodle{
 position:absolute;
-border-radius:50%;
-filter: blur(80px);
-opacity:0.5;
-animation: floatBlob 10s infinite alternate;
+font-size:24px;
+opacity:0.6;
+animation: floatUp linear infinite;
 }
 
-.blob1{
-width:300px;height:300px;
-background:#ff4d6d;
-top:-50px;left:-80px;
+@keyframes floatUp{
+from{transform:translateY(100vh);}
+to{transform:translateY(-120vh);}
 }
 
-.blob2{
-width:350px;height:350px;
-background:#ff9ff3;
-bottom:-80px;right:-100px;
-}
-
-@keyframes floatBlob{
-from{transform:translateY(0)}
-to{transform:translateY(40px)}
-}
-
-/* ===== GLASS CARD ===== */
-
+/* ===== CARD ===== */
 .card{
-background:rgba(255,255,255,0.2);
-backdrop-filter: blur(20px);
+background:white;
 padding:30px;
-border-radius:25px;
-box-shadow:0 25px 50px rgba(0,0,0,0.3);
+border-radius:20px;
+box-shadow:0 15px 40px rgba(0,0,0,0.15);
 text-align:center;
 width:92%;
-max-width:420px;
-color:white;
+max-width:380px;
 position:relative;
 z-index:2;
 }
 
 h1{
-font-size:26px;
-text-shadow:0 2px 10px rgba(0,0,0,0.3);
+color:#ff4d6d;
+font-size:24px;
 }
 
 p{
-font-size:17px;
+font-size:16px;
 }
 
 /* ===== BUTTONS ===== */
-
 button{
 padding:14px 18px;
-margin:10px;
+margin:8px;
 border:none;
-border-radius:40px;
+border-radius:30px;
 font-size:16px;
 cursor:pointer;
 width:85%;
@@ -98,12 +70,10 @@ transition:0.3s;
 .nextBtn{
 background:#ff4d6d;
 color:white;
-box-shadow:0 0 15px #ff4d6d;
 }
 
 .nextBtn:hover{
-transform:scale(1.08);
-box-shadow:0 0 25px #ff4d6d;
+transform:scale(1.05);
 }
 
 .hidden{display:none;}
@@ -112,7 +82,6 @@ box-shadow:0 0 25px #ff4d6d;
 background:#ff4d6d;
 color:white;
 font-size:18px;
-box-shadow:0 0 20px #ff4d6d;
 }
 
 #noBtn{
@@ -120,40 +89,17 @@ background:#ddd;
 position:relative;
 }
 
-img{
-width:100%;
-max-width:220px;
-border-radius:15px;
-margin-top:15px;
-}
-
-/* ===== FLOATING HEARTS ===== */
-
-.heart{
-position:absolute;
-color:white;
-font-size:22px;
-animation: floatUp linear infinite;
-opacity:0.8;
-}
-
-@keyframes floatUp{
-from{transform:translateY(100vh)}
-to{transform:translateY(-120vh)}
-}
-
 /* ===== CONFETTI ===== */
-
 .confetti{
 position:absolute;
 width:8px;
 height:8px;
-background:white;
+background:red;
 animation: fall 3s linear infinite;
 }
 
 @keyframes fall{
-to{transform:translateY(100vh) rotate(360deg)}
+to{transform:translateY(100vh) rotate(360deg);}
 }
 
 </style>
@@ -161,49 +107,135 @@ to{transform:translateY(100vh) rotate(360deg)}
 
 <body>
 
-<div class="blob blob1"></div>
-<div class="blob blob2"></div>
-
 <div class="card">
 
+<!-- Q1 -->
 <div id="q1">
 <h1>Hey Husband ❤️</h1>
 <p>Who makes your heart happiest every day?</p>
-<button class="nextBtn" onclick="next('q2')">Me 💕</button>
-<button class="nextBtn" onclick="next('q2')">Also Me 😘</button>
+<button class="nextBtn" onclick="nextPage('q2')">Me 💕</button>
+<button class="nextBtn" onclick="nextPage('q2')">Also Me 😘</button>
 </div>
 
+<!-- Q2 -->
 <div id="q2" class="hidden">
 <h1>Be honest 😏</h1>
-<p>Who gets angry first in fights?</p>
-<button class="nextBtn" onclick="next('q3')">Me 😇</button>
+<p>Who gets angry first in our fights?</p>
+<button class="nextBtn" onclick="nextPage('q3')">Me 😇</button>
 <button class="nextBtn" onclick="changeAnswer(this)">You 😆</button>
 </div>
 
+<!-- Q3 -->
 <div id="q3" class="hidden">
 <h1>Very Important 🤭</h1>
-<p>Who takes 30 mins after saying "5 mins"?</p>
-<button class="nextBtn" onclick="next('message')">Leela 😜</button>
-<button class="nextBtn" onclick="next('message')">Krishna 🤣</button>
+<p>Who says "5 mins" but takes 30 mins?</p>
+<button class="nextBtn" onclick="nextPage('message')">Leela 😜</button>
+<button class="nextBtn" onclick="nextPage('message')">Krishna 🤣</button>
 </div>
 
+<!-- LOVE LETTER -->
 <div id="message" class="hidden">
-<h1>A Message ❤️</h1>
-<p>You are my happiness,<br>my peace,<br>my forever 💕</p>
-<img src="yourphoto.jpg">
-<br><br>
-<button class="nextBtn" onclick="next('proposal')">Next 💌</button>
+<h1>💌 A Love Letter</h1>
+<p id="typingText"></p>
+<button class="nextBtn" onclick="nextPage('proposal')">Next 💌</button>
 </div>
 
+<!-- PROPOSAL -->
 <div id="proposal" class="hidden">
 <h1>One Last Question 💍</h1>
 <p>Will you be my Valentine forever?</p>
 <button id="yesBtn" onclick="yes()">YES ❤️</button>
-<button id="noBtn" onmouseover="growYes()">NO 😏</button>
+<button id="noBtn" onmouseover="moveNo()">NO 😏</button>
 </div>
 
+<!-- RESULT -->
 <div id="result" class="hidden">
 <h1>YAYYYYY ❤️</h1>
 <p>I love you soooo much 😍</p>
 <p>Forever yours 💕</p>
 </div>
+
+</div>
+
+<script>
+
+/* ===== PAGE SWITCH ===== */
+function nextPage(id){
+document.querySelectorAll(".card > div").forEach(div => div.classList.add("hidden"));
+document.getElementById(id).classList.remove("hidden");
+
+if(id==="message") startTyping();
+}
+
+/* ===== FUNNY ANSWER ===== */
+function changeAnswer(btn){
+btn.innerHTML="Nice try 😜";
+setTimeout(()=> nextPage('q3'),800);
+}
+
+/* ===== RUNNING NO BUTTON ===== */
+function moveNo(){
+const btn=document.getElementById("noBtn");
+btn.style.position="absolute";
+btn.style.left=Math.random()*70+"%";
+btn.style.top=Math.random()*70+"%";
+}
+
+/* ===== LOVE LETTER TYPING EFFECT ===== */
+const message = `You are my happiness,
+my peace,
+my biggest strength,
+and my forever person ❤️
+
+I miss you every single day 🥺
+and I can’t wait to hug you again.
+
+You are my home.`;
+
+let i=0;
+function startTyping(){
+document.getElementById("typingText").innerHTML="";
+i=0;
+type();
+}
+
+function type(){
+if(i<message.length){
+document.getElementById("typingText").innerHTML += message.charAt(i);
+i++;
+setTimeout(type,40);
+}
+}
+
+/* ===== CONFETTI ===== */
+function yes(){
+nextPage("result");
+
+for(let i=0;i<80;i++){
+let c=document.createElement("div");
+c.className="confetti";
+c.style.left=Math.random()*100+"%";
+c.style.top="-10px";
+c.style.background=`hsl(${Math.random()*360},80%,70%)`;
+document.body.appendChild(c);
+setTimeout(()=>c.remove(),3000);
+}
+}
+
+/* ===== FLOATING DOODLES ===== */
+const emojis=["💖","💕","💍","🌹","✨","💘"];
+
+setInterval(()=>{
+let d=document.createElement("div");
+d.className="doodle";
+d.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+d.style.left=Math.random()*100+"%";
+d.style.animationDuration=(6+Math.random()*6)+"s";
+document.body.appendChild(d);
+setTimeout(()=>d.remove(),12000);
+},600);
+
+</script>
+
+</body>
+</html>
