@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For My Love ❤️</title>
+
+<style>
+body{
+margin:0;
+height:100vh;
+font-family: 'Comic Sans MS', cursive;
+background:#fff5f7;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+}
+
+/* Floating doodles */
+body::before{
+content:"💖 💕 💘 💞 💓 💗 💝";
+position:absolute;
+font-size:70px;
+opacity:0.2;
+animation:float 25s linear infinite;
+white-space:nowrap;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-100vh);}
+}
+
+.card{
+background:white;
+padding:40px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+text-align:center;
+width:360px;
+}
+
+h1{color:#ff4d6d;}
+
+button{
+padding:12px 20px;
+margin:10px;
+border:none;
+border-radius:30px;
+font-size:18px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.nextBtn{
+background:#ff4d6d;
+color:white;
+}
+
+.hidden{display:none;}
+
+#yesBtn{
+background:#ff4d6d;
+color:white;
+font-size:20px;
+}
+
+#noBtn{
+background:#ddd;
+position:relative;
+}
+
+img{
+width:200px;
+border-radius:15px;
+margin-top:15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<!-- Q1 -->
+<div id="q1">
+<h1>Hey Husband ❤️</h1>
+<p>Who makes your heart happiest every day? 😊</p>
+<button class="nextBtn" onclick="next('q2')">Me 💕</button>
+<button class="nextBtn" onclick="next('q2')">Also Me 😘</button>
+</div>
+
+<!-- Q2 -->
+<div id="q2" class="hidden">
+<h1>Be honest 😏</h1>
+<p>Who gets angry first in our fights? 🔥</p>
+
+<button class="nextBtn" onclick="next('q3')">
+Me 😇
+</button>
+
+<button class="nextBtn" onclick="changeAnswer(this)">
+You 😆
+</button>
+</div>
+
+<!-- Q3 FUNNY -->
+<div id="q3" class="hidden">
+<h1>Very Important Question 🤭</h1>
+<p>Who says "5 mins" but takes 30 mins to get ready? 😂</p>
+
+<button class="nextBtn" onclick="next('message')">
+Leela 😜
+</button>
+
+<button class="nextBtn" onclick="next('message')">
+Krishna 🤣
+</button>
+</div>
+
+<!-- Message -->
+<div id="message" class="hidden">
+<h1>A Message For You ❤️</h1>
+<p>
+You are my happiness,<br>
+my peace,<br>
+my biggest strength,<br>
+and my forever person 💕
+</p>
+
+<p>I miss you every single day 🥺</p>
+
+<img src="yourphoto.jpg">
+
+<br><br>
+<button class="nextBtn" onclick="next('proposal')">Next 💌</button>
+</div>
+
+<!-- Proposal -->
+<div id="proposal" class="hidden">
+<h1>One Last Question 💍</h1>
+<p>Will you be my Valentine forever?</p>
+
+<button id="yesBtn" onclick="yes()">YES ❤️</button>
+<button id="noBtn" onmouseover="growYes()">NO 😏</button>
+</div>
+
+<!-- Result -->
+<div id="result" class="hidden">
+<h1>YAYYYYY ❤️</h1>
+<p>I love you soooo much 😍</p>
+<p>Forever yours 💕</p>
+</div>
+
+</div>
+
+<script>
+
+function next(id){
+document.querySelectorAll(".card > div").forEach(d=>d.classList.add("hidden"));
+document.getElementById(id).classList.remove("hidden");
+}
+
+/* Funny denial effect */
+function changeAnswer(btn){
+btn.innerHTML = "Hehe… nice try 😜";
+setTimeout(()=> next('q3'), 900);
+}
+
+/* Proposal fun effect */
+let size = 20;
+
+function growYes(){
+size += 8;
+document.getElementById("yesBtn").style.fontSize = size + "px";
+
+const noBtn = document.getElementById("noBtn");
+noBtn.style.position = "absolute";
+noBtn.style.left = Math.random()*80 + "%";
+noBtn.style.top = Math.random()*80 + "%";
+}
+
+function yes(){
+next("result");
+}
+
+</script>
+
+</body>
+</html>
