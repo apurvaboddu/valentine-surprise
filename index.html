@@ -2,238 +2,205 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Love ❤️</title>
+<title>For My Husband ❤️</title>
 
 <style>
-
-/* ===== BACKGROUND ===== */
 body{
 margin:0;
-height:100vh;
-font-family:'Segoe UI', sans-serif;
-display:flex;
-justify-content:center;
-align-items:center;
+font-family:'Comic Sans MS',cursive;
+background:#ffeef4;
 overflow:hidden;
-background: linear-gradient(135deg,#ffe6eb,#fff5f7,#ffe0f0);
+text-align:center;
 }
 
-/* ===== FLOATING DOODLES ===== */
+/* FLOATING DOODLES */
 .doodle{
-position:absolute;
-font-size:24px;
-opacity:0.6;
-animation: floatUp linear infinite;
+position:fixed;
+font-size:22px;
+opacity:.18;
+animation:float 28s linear infinite;
+pointer-events:none;
 }
-
-@keyframes floatUp{
+@keyframes float{
 from{transform:translateY(100vh);}
-to{transform:translateY(-120vh);}
+to{transform:translateY(-100vh);}
 }
 
-/* ===== CARD ===== */
 .card{
 background:white;
-padding:30px;
+width:430px;
+margin:70px auto;
+padding:35px;
 border-radius:20px;
-box-shadow:0 15px 40px rgba(0,0,0,0.15);
-text-align:center;
-width:92%;
-max-width:380px;
+box-shadow:0 10px 30px rgba(0,0,0,.2);
 position:relative;
 z-index:2;
 }
 
-h1{
-color:#ff4d6d;
-font-size:24px;
-}
-
-p{
-font-size:16px;
-}
-
-/* ===== BUTTONS ===== */
 button{
-padding:14px 18px;
-margin:8px;
+padding:12px 24px;
 border:none;
-border-radius:30px;
+border-radius:14px;
+background:#ff4d88;
+color:white;
+margin:10px;
 font-size:16px;
 cursor:pointer;
-width:85%;
-max-width:260px;
-transition:0.3s;
-}
-
-.nextBtn{
-background:#ff4d6d;
-color:white;
-}
-
-.nextBtn:hover{
-transform:scale(1.05);
+transition:.3s;
 }
 
 .hidden{display:none;}
 
-#yesBtn{
-background:#ff4d6d;
-color:white;
-font-size:18px;
+.gif{
+width:260px;
+border-radius:15px;
+margin:15px;
 }
 
-#noBtn{
-background:#ddd;
-position:relative;
+.heart{
+position:fixed;
+font-size:24px;
+color:red;
+animation:burst 3s linear forwards;
 }
-
-/* ===== CONFETTI ===== */
-.confetti{
-position:absolute;
-width:8px;
-height:8px;
-background:red;
-animation: fall 3s linear infinite;
+@keyframes burst{
+0%{transform:translateY(0);}
+100%{transform:translateY(-700px);opacity:0;}
 }
-
-@keyframes fall{
-to{transform:translateY(100vh) rotate(360deg);}
-}
-
 </style>
 </head>
 
 <body>
 
-<div class="card">
+<audio autoplay loop>
+<source src="https://cdn.pixabay.com/audio/2023/03/27/audio_5d7c4a91df.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* DOODLES */
+for(let i=0;i<35;i++){
+let d=document.createElement("div");
+d.className="doodle";
+d.innerHTML=["💖","💕","😍","😊","❤️","🥰"][Math.floor(Math.random()*6)];
+d.style.left=Math.random()*100+"%";
+d.style.animationDelay=Math.random()*20+"s";
+document.body.appendChild(d);
+}
+</script>
+
+<!-- INTRO -->
+<div id="intro" class="card">
+<h2>Hey Husband ❤️</h2>
+<p>I have a surprise for you…</p>
+<button onclick="show('letter')">Open 💌</button>
+</div>
+
+<!-- LETTER -->
+<div id="letter" class="card hidden">
+<h2>💌 A Letter For You</h2>
+<p style="font-size:18px;line-height:1.7;">
+You are my happiness ❤️<br><br>
+My safe place 💕<br><br>
+My biggest strength 💪<br><br>
+And my forever person 💖<br><br>
+I miss you every single day 🥹<br><br>
+And I can't wait to hug you again 😍<br><br>
+I love you more than words can ever say…
+</p>
+<button onclick="show('q1')">Continue ❤️</button>
+</div>
 
 <!-- Q1 -->
-<div id="q1">
-<h1>Hey Husband ❤️</h1>
-<p>Who makes your heart happiest every day?</p>
-<button class="nextBtn" onclick="nextPage('q2')">Me 💕</button>
-<button class="nextBtn" onclick="nextPage('q2')">Also Me 😘</button>
+<div id="q1" class="card hidden">
+<h2>Question 1 😍</h2>
+<img class="gif" src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
+<p>Who makes your heart smile every day?</p>
+<button onclick="show('q2')">Your Wifey 😘</button>
+<button onclick="show('q2')">Your Pilla Bacha 🥹</button>
 </div>
 
 <!-- Q2 -->
-<div id="q2" class="hidden">
-<h1>Be honest 😏</h1>
-<p>Who gets angry first in our fights?</p>
-<button class="nextBtn" onclick="nextPage('q3')">Me 😇</button>
-<button class="nextBtn" onclick="changeAnswer(this)">You 😆</button>
+<div id="q2" class="card hidden">
+<h2>Be Honest 😏</h2>
+<img class="gif" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
+<p>Who gets angry easier?</p>
+<button onclick="warn()">You 😆</button>
+<button onclick="show('q3')">Me 😇</button>
+<p id="warn" style="color:#ff4d88;font-weight:bold;"></p>
 </div>
 
 <!-- Q3 -->
-<div id="q3" class="hidden">
-<h1>Very Important 🤭</h1>
-<p>Who says "5 mins" but takes 30 mins?</p>
-<button class="nextBtn" onclick="nextPage('message')">Leela 😜</button>
-<button class="nextBtn" onclick="nextPage('message')">Krishna 🤣</button>
+<div id="q3" class="card hidden">
+<h2>Very Important 😆</h2>
+<p style="font-size:18px;">
+Who says "5 mins" but takes 30 mins to get ready? 😂
+</p>
+<button onclick="show('ready')">Leela🤣</button>
+<button onclick="show('ready')">Krishna 😜</button>
+
 </div>
 
-<!-- LOVE LETTER -->
-<div id="message" class="hidden">
-<h1>💌 A Love Letter</h1>
-<p id="typingText"></p>
-<button class="nextBtn" onclick="nextPage('proposal')">Next 💌</button>
+<div id="ready" class="card hidden">
+<h2>Are You Ready? ❤️</h2>
+<img class="gif" src="https://media.giphy.com/media/3oriO6qJiXajN0TyDu/giphy.gif">
+<p>One last question waiting…</p>
+<button onclick="show('final')">Yes I'm Ready 😍</button>
 </div>
 
-<!-- PROPOSAL -->
-<div id="proposal" class="hidden">
-<h1>One Last Question 💍</h1>
-<p>Will you be my Valentine forever?</p>
-<button id="yesBtn" onclick="yes()">YES ❤️</button>
-<button id="noBtn" onmouseover="moveNo()">NO 😏</button>
-</div>
-
-<!-- RESULT -->
-<div id="result" class="hidden">
-<h1>YAYYYYY ❤️</h1>
-<p>I love you soooo much 😍</p>
-<p>Forever yours 💕</p>
-</div>
-
+<!-- FINAL -->
+<div id="final" class="card hidden">
+<h2>Will You Be My Valentine Forever? 💖</h2>
+<img class="gif" src="https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif">
+<br>
+<button onclick="celebrate()">YES ❤️</button>
+<button id="noBtn" onmouseover="escapeNo()">NO 😏</button>
 </div>
 
 <script>
-
-/* ===== PAGE SWITCH ===== */
-function nextPage(id){
-document.querySelectorAll(".card > div").forEach(div => div.classList.add("hidden"));
+function show(id){
+document.querySelectorAll(".card").forEach(c=>c.classList.add("hidden"));
 document.getElementById(id).classList.remove("hidden");
-
-if(id==="message") startTyping();
 }
 
-/* ===== FUNNY ANSWER ===== */
-function changeAnswer(btn){
-btn.innerHTML="Nice try 😜";
-setTimeout(()=> nextPage('q3'),800);
+function warn(){
+document.getElementById("warn").innerText="😜 Select wisely mister!";
 }
 
-/* ===== RUNNING NO BUTTON ===== */
-function moveNo(){
-const btn=document.getElementById("noBtn");
+function escapeNo(){
+let btn=document.getElementById("noBtn");
 btn.style.position="absolute";
-btn.style.left=Math.random()*70+"%";
+btn.style.left=Math.random()*80+"%";
 btn.style.top=Math.random()*70+"%";
 }
 
-/* ===== LOVE LETTER TYPING EFFECT ===== */
-const message = `You are my happiness,
-my peace,
-my biggest strength,
-and my forever person ❤️
+/* ❤️ UPDATED FINAL SCREEN */
+/* ❤️ NEW BEAUTIFUL FINAL SCREEN */
 
-I miss you every single day 🥺
-and I can’t wait to hug you again.
 
-You are my home.`;
+function celebrate(){
+document.getElementById("final").innerHTML = `
+<div style="
+height:520px;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#ffccd5;
+border-radius:25px;
+overflow:hidden;
+box-shadow:0 20px 40px rgba(0,0,0,0.3);
+">
 
-let i=0;
-function startTyping(){
-document.getElementById("typingText").innerHTML="";
-i=0;
-type();
+<img src="dudu.png" 
+style="
+max-height:480px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.25);
+">
+
+</div>
+`;
 }
 
-function type(){
-if(i<message.length){
-document.getElementById("typingText").innerHTML += message.charAt(i);
-i++;
-setTimeout(type,40);
-}
-}
-
-/* ===== CONFETTI ===== */
-function yes(){
-nextPage("result");
-
-for(let i=0;i<80;i++){
-let c=document.createElement("div");
-c.className="confetti";
-c.style.left=Math.random()*100+"%";
-c.style.top="-10px";
-c.style.background=`hsl(${Math.random()*360},80%,70%)`;
-document.body.appendChild(c);
-setTimeout(()=>c.remove(),3000);
-}
-}
-
-/* ===== FLOATING DOODLES ===== */
-const emojis=["💖","💕","💍","🌹","✨","💘"];
-
-setInterval(()=>{
-let d=document.createElement("div");
-d.className="doodle";
-d.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
-d.style.left=Math.random()*100+"%";
-d.style.animationDuration=(6+Math.random()*6)+"s";
-document.body.appendChild(d);
-setTimeout(()=>d.remove(),12000);
-},600);
 
 </script>
 
